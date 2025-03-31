@@ -5,6 +5,7 @@ import com.andrianigiordano.springboot.actors.Actors;
 import com.andrianigiordano.springboot.movies.MoviesService;
 import com.andrianigiordano.springboot.movies.Movies;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,19 +15,19 @@ import java.util.Map;
 
 /**
  * Controller per la gestione delle ricerche di attori e film.
- * Espone due endpoint per effettuare ricerche in base al nome.
  */
-@RestController // Indica che questo controller gestisce risposte in formato JSON.
+@RestController
+@RequestMapping("/search") // Definisce il percorso base per tutte le ricerche
 public class SearchController {
 
-    private final ActorsService actorsService; // Servizio per la ricerca degli attori
-    private final MoviesService moviesService; // Servizio per la ricerca dei film
+    private final ActorsService actorsService;  // Servizio per la gestione degli attori
+    private final MoviesService moviesService;  // Servizio per la gestione dei film
 
     /**
-     * Costruttore per l'inizializzazione dei servizi.
+     * Costruttore del controller che inietta i servizi necessari.
      *
-     * @param actorsService Servizio per la ricerca degli attori.
-     * @param moviesService Servizio per la ricerca dei film.
+     * @param actorsService il servizio che gestisce la logica degli attori
+     * @param moviesService il servizio che gestisce la logica dei film
      */
     public SearchController(ActorsService actorsService, MoviesService moviesService) {
         this.actorsService = actorsService;
@@ -34,35 +35,38 @@ public class SearchController {
     }
 
     /**
-     * Endpoint per la ricerca degli attori in base al nome.
+     * Endpoint per cercare attori in base a un nome.
+     * Utilizza il servizio ActorsService per eseguire la ricerca.
+     * La risposta è un oggetto JSON che contiene i risultati e la query.
      *
-     * @param query Nome o parte del nome dell'attore da cercare.
-     * @return Una mappa contenente i risultati della ricerca e la query effettuata.
+     * @param query la stringa di ricerca per gli attori
+     * @return una mappa contenente i risultati della ricerca degli attori e la query
      */
-    @GetMapping("/search-actors")
+    @GetMapping("/search-actors") // Mappatura per l'endpoint di ricerca degli attori
     public Map<String, Object> searchActors(@RequestParam("query") String query) {
-        List<Actors> actorsResults = actorsService.searchActorsByName(query); // Cerca attori con il nome specificato
+        List<Actors> actorsResults = actorsService.searchActorsByName(query);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("actors", actorsResults); // Aggiunge i risultati alla risposta JSON
-        response.put("query", query); // Aggiunge la query originale alla risposta
+        response.put("actors", actorsResults);  // Aggiunge la lista degli attori trovati
+        response.put("query", query);  // Aggiunge la query di ricerca
 
         return response; // Restituisce la risposta in formato JSON
     }
 
     /**
-     * Endpoint per la ricerca dei film in base al nome.
+     * Endpoint per cercare film in base a un nome.
+     * La risposta è un oggetto JSON che contiene i risultati e la query.
      *
-     * @param query Nome o parte del nome del film da cercare.
-     * @return Una mappa contenente i risultati della ricerca e la query effettuata.
+     * @param query la stringa di ricerca per i film
+     * @return una mappa contenente i risultati della ricerca dei film e la query
      */
-    @GetMapping("/search-movies")
+    @GetMapping("/search-movies") // Mappatura per l'endpoint di ricerca dei film
     public Map<String, Object> searchMovies(@RequestParam("query") String query) {
-        List<Movies> moviesResult = moviesService.searchMoviesByName(query); // Cerca film con il nome specificato
+        List<Movies> moviesResult = moviesService.searchMoviesByName(query);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("movies", moviesResult); // Aggiunge i risultati alla risposta JSON
-        response.put("query", query); // Aggiunge la query originale alla risposta
+        response.put("movies", moviesResult);  // Aggiunge la lista dei film trovati
+        response.put("query", query);  // Aggiunge la query di ricerca
 
         return response; // Restituisce la risposta in formato JSON
     }
