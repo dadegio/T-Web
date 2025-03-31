@@ -1,21 +1,27 @@
 <section class="search-actors container my-5">
     <div class="search-results">
+        <!-- Titolo della sezione che mostra i risultati della ricerca -->
         <h1 class="mb-4">Results for: "{{query}}"</h1>
 
+        <!-- Se ci sono attori, visualizza i risultati -->
         {{#if actors}}
             <div class="row mb-5">
                 <div class="col-12">
                 </div>
+                <!-- Ciclo attraverso i film che corrispondono alla ricerca -->
                 {{#each movies}}
                     <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="card h-100 bg-dark text-white">
+                            <!-- Link per accedere alla pagina del film -->
                             <a href="/movies/get-all-info/{{this.id}}" class="movie-link">
+                                <!-- Immagine del poster del film -->
                                 <img src="{{#if this.posterUrl}}{{this.posterUrl}}{{else}}/images/default-poster.jpg{{/if}}"
                                      class="card-img-top"
                                      alt="{{this.title}}"
                                      data-id="{{this.id}}">
                             </a>
                             <div class="card-body">
+                                <!-- Dettagli del film: titolo, nome attore, tagline, data -->
                                 <h5 class="card-title">{{this.title}}</h5>
                                 <p class="card-text"><strong>{{this.name}}</strong></p>
                                 <p class="card-text">{{this.tagline}}</p>

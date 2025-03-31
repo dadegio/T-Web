@@ -1,11 +1,18 @@
 <section class="container py-4">
+    <!-- Inizio di una sezione che utilizza una classe container per il layout e py-4 per il padding verticale -->
+
     <div class="row">
+        <!-- Inizio di una riga, utile per creare una griglia di carte responsive -->
+
         {{#each movies}}
+            <!-- Ciclo che itera attraverso l'array di film (movies) per creare una card per ogni film -->
             <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card h-100 bg-dark text-white"> <!-- Card scura con testo bianco -->
+                <div class="card h-100 bg-dark text-white">
                     <a href="/movies/get-all-info/{{this.id}}" class="movie-link">
+                        <!-- Link che porta alla pagina dettagliata del film.-->
                         <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}" data-id="{{this.id}}">
                     </a>
+
                     <div class="card-body p-2">
                         <h4 class="card-title">{{this.title}}</h4>
                         <p class="card-text mb-1"><strong>Year:</strong> {{this.date}}</p>
@@ -16,5 +23,7 @@
                 </div>
             </div>
         {{/each}}
+        <!-- Fine del ciclo che genera una card per ogni film -->
     </div>
 </section>
+<!-- Fine della sezione contenitore -->

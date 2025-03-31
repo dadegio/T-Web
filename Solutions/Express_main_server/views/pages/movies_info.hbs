@@ -1,6 +1,7 @@
 <section class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
+            <!-- Card contenente le informazioni principali del film -->
             <div class="card bg-dark text-light shadow-lg">
                 <div class="row g-0">
                     <div class="col-md-3 d-flex align-items-center">
@@ -9,6 +10,7 @@
                     <div class="col-md-9">
                         <div class="card-body">
                             <h2 class="card-title">{{movie.title}}</h2>
+                            <!-- Dettagli principali del film -->
                             <p><strong>Year:</strong> {{movie.date}}</p>
                             <p><strong>Tagline:</strong> {{movie.tagline}}</p>
                             <p><strong>Trama:</strong> {{movie.description}}</p>
@@ -19,7 +21,7 @@
                 </div>
             </div>
 
-            <!-- Tabs -->
+            <!-- Menu a tab per navigare tra le informazioni -->
             <ul class="nav nav-tabs mt-4 bg-dark">
                 <li class="nav-item">
                     <a class="nav-link active text-light bg-secondary" data-bs-toggle="tab" href="#infoTab">Informations</a>
@@ -33,7 +35,6 @@
                 <li class="nav-item">
                     <a class="nav-link text-light bg-secondary" data-bs-toggle="tab" href="#addReviewTab">Add Reviews</a>
                 </li>
-
             </ul>
 
             <div class="tab-content mt-3">
@@ -41,6 +42,7 @@
                 <div id="infoTab" class="tab-pane fade show active">
                     <h3>Informations</h3>
                     <div class="row">
+                        <!-- Paesi di produzione -->
                         <div class="col-md-6">
                             <h5>Production's Countries</h5>
                             <ul class="list-group bg-dark">
@@ -49,6 +51,7 @@
                                 {{/each}}
                             </ul>
                         </div>
+                        <!-- Lingue -->
                         <div class="col-md-6">
                             <h5>Languages</h5>
                             <ul class="list-group bg-dark">
@@ -59,6 +62,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
+                        <!-- Generi -->
                         <div class="col-md-6">
                             <h5>Genres</h5>
                             <ul class="list-group bg-dark">
@@ -67,6 +71,7 @@
                                 {{/each}}
                             </ul>
                         </div>
+                        <!-- Studi -->
                         <div class="col-md-6">
                             <h5>Studios</h5>
                             <ul class="list-group bg-dark">
@@ -77,6 +82,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
+                        <!-- Temi del film -->
                         <div class="col-md-12">
                             <h5>Themes</h5>
                             <ul class="list-group bg-dark">
@@ -98,6 +104,7 @@
                     </ul>
                 </div>
 
+                <!-- Sezione Recensioni -->
                 <div id="reviewsTab" class="tab-pane fade">
                     <h3>Reviews</h3>
                     {{#if reviews.length}}
@@ -116,10 +123,11 @@
                     {{/if}}
                 </div>
 
+                <!-- Sezione Aggiungi Recensioni -->
                 <div id="addReviewTab" class="tab-pane fade">
                     <h3>Add reviews</h3>
                     <form action="http://localhost:3001/reviews/add" method="POST">
-                        <!-- Nascondi il titolo del film -->
+                        <!-- Informazioni sul film -->
                         <input type="hidden" name="movie_title" value="{{movie.title}}">
 
                         <!-- Link Rotten Tomatoes -->
@@ -134,7 +142,7 @@
                             <input type="text" name="critic_name" class="form-control bg-dark text-light" required>
                         </div>
 
-                        <!-- Top Critic (checkbox) -->
+                        <!-- Top Critic -->
                         <div class="mb-3">
                             <label class="form-label">Top Critic</label>
                             <input type="checkbox" name="top_critic" class="form-check-input">
@@ -156,19 +164,19 @@
                             </select>
                         </div>
 
-                        <!-- Punteggio della recensione -->
+                        <!-- Punteggio recensione -->
                         <div class="mb-3">
                             <label class="form-label">Score (0-10)</label>
                             <input type="number" name="review_score" min="0" max="10" class="form-control bg-dark text-light" required>
                         </div>
 
-                        <!-- Data della recensione -->
+                        <!-- Data recensione -->
                         <div class="mb-3">
                             <label class="form-label">Review date</label>
                             <input type="date" name="review_date" class="form-control bg-dark text-light" required>
                         </div>
 
-                        <!-- Contenuto della recensione -->
+                        <!-- Contenuto recensione -->
                         <div class="mb-3">
                             <label class="form-label">Content</label>
                             <textarea name="review_content" class="form-control bg-dark text-light" rows="4" required></textarea>
@@ -178,8 +186,6 @@
                         <button type="submit" class="btn btn-primary">Submit review</button>
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
