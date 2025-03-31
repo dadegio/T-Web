@@ -161,15 +161,6 @@ router.get('/members/:critic_name', async (req, res, next) => {
  *                     type: string
  *                   review_content:
  *                     type: string
- *       "404":
- *         description: Nessuna recensione trovata per il film specificato.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
  *       "500":
  *         description: Errore nel recupero delle recensioni.
  *         content:
@@ -230,15 +221,6 @@ router.get('/reviews/:movieName/:releaseDate', async (req, res) => {
  *               type: object
  *               properties:
  *                 message:
- *                   type: string
- *       "400":
- *         description: Richiesta non valida (dati mancanti o errati).
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
  *                   type: string
  *       "500":
  *         description: Errore durante l'aggiunta della recensione.
