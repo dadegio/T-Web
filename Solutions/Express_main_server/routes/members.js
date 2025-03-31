@@ -82,32 +82,23 @@ router.get('/members', async (req, res) => {
  *                     properties:
  *                       rotten_tomatoes_link:
  *                         type: string
- *                         example: "https://www.rottentomatoes.com/m/inception/reviews"
  *                       movie_title:
  *                         type: string
- *                         example: "Inception"
  *                       critic_name:
  *                         type: string
- *                         example: "Roger Ebert"
  *                       top_critic:
  *                         type: boolean
- *                         example: true
  *                       publisher_name:
  *                         type: string
- *                         example: "Chicago Sun-Times"
  *                       review_type:
  *                         type: string
- *                         example: "Fresh"
  *                       review_score:
  *                         type: string
- *                         example: "9/10"
  *                       review_date:
  *                         type: string
  *                         format: date
- *                         example: "2010-07-16"
  *                       review_content:
  *                         type: string
- *                         example: "A mind-bending thriller with stunning visuals and a great cast."
  *       '500':
  *         description: Errore interno del server
  */

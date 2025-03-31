@@ -25,13 +25,11 @@ setupSwagger(router)
  *                   description: Lista dei top critic (massimo 3).
  *                   items:
  *                     type: string
- *                   example: ["Roger Ebert", "Pauline Kael", "Leonard Maltin"]
  *                 allCritics:
  *                   type: array
  *                   description: Lista di altri critici (massimo 10).
  *                   items:
  *                     type: string
- *                   example: ["John Doe", "Jane Smith", "Mark Johnson"]
  *       "500":
  *         description: Errore nel recupero dei membri.
  *         content:
@@ -41,7 +39,6 @@ setupSwagger(router)
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Errore interno del server."
  */
 router.get('/members', async (req, res, next) => {
   try {
@@ -67,7 +64,6 @@ router.get('/members', async (req, res, next) => {
  *         description: Nome del critico di cui recuperare i dettagli.
  *         schema:
  *           type: string
- *           example: "Roger Ebert"
  *     responses:
  *       "200":
  *         description: Dettagli del critico recuperati con successo.
@@ -78,28 +74,22 @@ router.get('/members', async (req, res, next) => {
  *               properties:
  *                 criticName:
  *                   type: string
- *                   example: "Roger Ebert"
  *                 reviews:
  *                   type: array
  *                   items:
  *                     type: object
- *                     properties:
+ *                   properties:
  *                       movie_title:
  *                         type: string
- *                         example: "The Dark Knight"
  *                       review_type:
  *                         type: string
- *                         example: "Positive"
  *                       review_score:
  *                         type: number
- *                         example: 9.5
  *                       review_date:
  *                         type: string
  *                         format: date
- *                         example: "2008-07-18"
  *                       review_content:
  *                         type: string
- *                         example: "Un capolavoro della cinematografia moderna."
  *       "404":
  *         description: Critico non trovato.
  *         content:
@@ -109,7 +99,6 @@ router.get('/members', async (req, res, next) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Critico non trovato."
  *       "500":
  *         description: Errore nel recupero delle informazioni del critico.
  *         content:
@@ -119,7 +108,6 @@ router.get('/members', async (req, res, next) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Errore interno del server."
  */
 router.get('/members/:critic_name', async (req, res, next) => {
   try {
@@ -145,15 +133,12 @@ router.get('/members/:critic_name', async (req, res, next) => {
  *         description: Il nome del film da cercare.
  *         schema:
  *           type: string
- *           example: "Inception"
  *       - name: releaseDate
  *         in: path
  *         required: true
- *         description: La data di uscita del film.
  *         schema:
  *           type: string
  *           format: date
- *           example: "2010-07-16"
  *     responses:
  *       "200":
  *         description: Recensioni del film recuperate con successo.
@@ -166,22 +151,16 @@ router.get('/members/:critic_name', async (req, res, next) => {
  *                 properties:
  *                   movie_title:
  *                     type: string
- *                     example: "Inception"
  *                   critic_name:
  *                     type: string
- *                     example: "Roger Ebert"
  *                   review_type:
  *                     type: string
- *                     example: "Positive"
  *                   review_score:
  *                     type: number
- *                     example: 9.0
  *                   review_date:
  *                     type: string
- *                     example: "2010"
  *                   review_content:
  *                     type: string
- *                     example: "Un film che ha ridefinito il concetto di sogno nel cinema."
  *       "404":
  *         description: Nessuna recensione trovata per il film specificato.
  *         content:
@@ -191,7 +170,6 @@ router.get('/members/:critic_name', async (req, res, next) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Recensioni non trovate per il film specificato."
  *       "500":
  *         description: Errore nel recupero delle recensioni.
  *         content:
@@ -201,7 +179,6 @@ router.get('/members/:critic_name', async (req, res, next) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Errore interno del server."
  */
 router.get('/reviews/:movieName/:releaseDate', async (req, res) => {
   const { movieName, releaseDate } = req.params;
@@ -226,32 +203,24 @@ router.get('/reviews/:movieName/:releaseDate', async (req, res) => {
  *             properties:
  *               movie_title:
  *                 type: string
- *                 example: "The Matrix"
  *               critic_name:
  *                 type: string
- *                 example: "John Doe"
  *               top_critic:
  *                 type: boolean
  *                 example: true
  *               publisher_name:
  *                 type: string
- *                 example: "The New York Times"
  *               review_type:
  *                 type: string
- *                 example: "Positive"
  *               review_score:
  *                 type: number
- *                 example: 8.5
  *               review_date:
  *                 type: string
  *                 format: date
- *                 example: "1999-03-31"
  *               review_content:
  *                 type: string
- *                 example: "Un film che ha cambiato la storia del cinema!"
  *               rotten_tomatoes_link:
  *                 type: string
- *                 example: "https://www.rottentomatoes.com/m/the_matrix"
  *     responses:
  *       "201":
  *         description: Recensione aggiunta con successo.
@@ -262,7 +231,6 @@ router.get('/reviews/:movieName/:releaseDate', async (req, res) => {
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Recensione aggiunta con successo."
  *       "400":
  *         description: Richiesta non valida (dati mancanti o errati).
  *         content:
@@ -272,7 +240,6 @@ router.get('/reviews/:movieName/:releaseDate', async (req, res) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Dati della recensione non validi."
  *       "500":
  *         description: Errore durante l'aggiunta della recensione.
  *         content:
@@ -282,7 +249,6 @@ router.get('/reviews/:movieName/:releaseDate', async (req, res) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Errore interno del server."
  */
 router.post('/reviews/add', MEMBERS_REVIEW_CONTROLLER.addReview);
 

@@ -17,7 +17,6 @@ setupSwagger(router);
  *         description: Lista di attori recuperata con successo
  *         content:
  *           text/html:
- *             example: "Pagina HTML renderizzata con gli attori raggruppati"
  *       500:
  *         description: Errore nel recupero dei dati
  */
@@ -42,7 +41,6 @@ router.get('/get-all-actors', ACTORS_CONTROLLER.getAllActors);
  *         description: Dettagli dell'attore recuperati con successo
  *         content:
  *           text/html:
- *             example: "Pagina HTML renderizzata con i dettagli dell'attore"
  *       500:
  *         description: Impossibile recuperare i dettagli dell'attore
  */

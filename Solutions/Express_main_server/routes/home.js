@@ -22,26 +22,19 @@ var homeController = require('../controllers/home');
  *                 properties:
  *                   id:
  *                     type: integer
- *                     example: 1
  *                   name:
  *                     type: string
- *                     example: "Inception"
  *                   poster:
  *                     type: string
- *                     example: "https://image.tmdb.org/t/p/w500/xyz.jpg"
  *                   date:
  *                     type: integer
- *                     example: "2010"
  *                   tagline:
  *                     type: string
- *                     example: "Your mind is the scene of the crime."
  *                   description:
  *                     type: string
- *                     example: "A mind-bending thriller about dreams within dreams."
  *                   rating:
  *                     type: number
  *                     format: float
- *                     example: 8.8
  */
 
 router.get('/', homeController.getMoviesHome);

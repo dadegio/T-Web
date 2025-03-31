@@ -16,7 +16,6 @@ var router = express.Router();
  *             text/html:
  *               schema:
  *                 type: string
- *                 example: "<html>...</html>"
  *         "500":
  *           description: Errore nel caricamento della pagina
  * */
