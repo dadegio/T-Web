@@ -1,23 +1,35 @@
 <section class="actors-info py-5">
-    <h1 class="text-center fw-bold">{{name}} 's films</h1> <!-- Aggiungi il nome dell'attore qui -->
+    <!-- Sezione che mostra i film associati a un attore, con margine superiore e inferiore -->
+    <h1 class="text-center fw-bold">{{name}} 's films</h1>
     <div class="container">
 
         <div class="row d-flex flex-nowrap">
+
             {{#if actor.length}}
                 {{#each actor}}
+                    <!-- Ciclo che itererà su ciascun elemento dell'array 'actor' -->
                     <div class="col-md-3 mb-4">
-                        <div class="card shadow-sm bg-dark text-white"> <!-- Modifica per box scuro e testo bianco -->
+                        <!-- Colonna che occupa 3 unità su schermi di dimensioni medie o superiori e ha un margine inferiore -->
+
+                        <div class="card shadow-sm bg-dark text-white">
+                            <!-- Card con sfondo scuro e testo bianco, che ha anche un'ombra per l'effetto visivo -->
                             <a href="/movies/get-all-info/{{this.id}}" class="movie-link">
+                                <!-- Link che porta alla pagina con i dettagli del film. L'ID del film viene inserito nell'URL -->
                                 <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}" data-id="{{this.id}}">
+                                <!-- Immagine del poster del film. Se il link viene cliccato, porta alla pagina con i dettagli del film -->
                             </a>
                             <div class="card-body text-center">
-                                <h2 class="card-title">{{this.role}}</h2> <!-- Il testo qui è bianco, come richiesto -->
+                                <!-- Corpo della card con testo centrato -->
+                                <h2 class="card-title">{{this.role}}</h2>
+                                <!-- Mostra il ruolo dell'attore nel film, con il testo in bianco come richiesto -->
                             </div>
                         </div>
                     </div>
                 {{/each}}
+                <!-- Fine del ciclo 'each' per iterare su tutti i film dell'attore -->
             {{else}}
                 <div class="col-12">
+                    <!-- Se l'array 'actor' è vuoto, mostra il messaggio che nessun attore ha quel nome -->
                     <p class="text-center">No actors have this name.</p>
                 </div>
             {{/if}}

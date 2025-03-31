@@ -1,42 +1,75 @@
 <section onload="init()">
-<div class="container mt-3 long-container">
-    <h3 class="text-center">Chat Room</h3>
-    <div id="initial_form" class="card p-2 shadow">
-        <p class="text-muted small">Select a room to join:</p>
-        <form onsubmit="return false;">
-            <div class="mb-2">
-                <label for="name" class="form-label small">Your Name</label>
-                <input type="text" id="name" class="form-control form-control-sm" placeholder="Enter your name">
-            </div>
-            <div class="mb-2">
-                <label for="roomNo" class="form-label small">Choose a Room</label>
-                <select id="roomNo" class="form-select form-select-sm">
-                    <option value="Actors">Actors</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Comedy">Comedy</option>
-                    <option value="Horror">Horror</option>
-                    <option value="Documentary">Documentary</option>
-                    <option value="Thriller">Thriller</option>
-                    <option value="Fantasy">Fantasy</option>
-                    <option value="Music">Music</option>
-                    <option value="Family">Family</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Animation">Animation</option>
-                    <option value="TV Movie">TV Movie</option>
-                    <option value="Mystery">Mystery</option>
-                </select>
-            </div>
-            <button type="submit" id="connect" onclick="connectToRoom()" class="btn btn-success btn-sm w-100">Connect</button>
-        </form>
-    </div>
+    <!-- La sezione principale contiene un attributo 'onload' che richiama la funzione 'init()' quando la pagina è caricata -->
+    <div class="container mt-3 long-container">
+        <!-- Contenitore responsivo con margine superiore -->
 
-    <div id="chat_interface" class="card p-2 shadow mt-2 d-none">
-        <p class="small"><strong id="who_you_are"></strong>, you are in: <strong id="in_room"></strong></p>
-        <div id="chat_history" class="border rounded p-2 mb-2 bg-white small" style="height: 200px; overflow-y: auto;"></div>
-        <div class="input-group input-group-sm">
-            <input type="text" id="chat_input" class="form-control form-control-sm" placeholder="Type your message..." onkeypress="if(event.key === 'Enter') sendChatText()">
-            <button type="submit" id="chat_send" onclick="sendChatText()" class="btn btn-success btn-sm">Send</button>
+        <h3 class="text-center">Chat Room</h3>
+
+        <div id="initial_form" class="card p-2 shadow">
+            <!-- Sezione per il modulo iniziale (form di login) con una card che ha un padding e un'ombra -->
+
+            <p class="text-muted small">Select a room to join:</p>
+            <!-- Messaggio per invitare l'utente a selezionare una stanza -->
+
+            <form onsubmit="return false;">
+                <!-- Form che non invia i dati, ma usa JavaScript per gestire l'invio -->
+
+                <div class="mb-2">
+                    <!-- Contenitore per il campo "Name" -->
+                    <label for="name" class="form-label small">Your Name</label>
+                    <input type="text" id="name" class="form-control form-control-sm" placeholder="Enter your name">
+                </div>
+
+                <div class="mb-2">
+                    <!-- Contenitore per il campo "Room" -->
+                    <label for="roomNo" class="form-label small">Choose a Room</label>
+                    <!-- Etichetta per il menu a tendina per scegliere la stanza -->
+                    <select id="roomNo" class="form-select form-select-sm">
+                        <!-- Menu a tendina per selezionare la stanza da un elenco di stanze predefinite -->
+                        <option value="Actors">Actors</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Documentary">Documentary</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Music">Music</option>
+                        <option value="Family">Family</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Animation">Animation</option>
+                        <option value="TV Movie">TV Movie</option>
+                        <option value="Mystery">Mystery</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="connect" onclick="connectToRoom()" class="btn btn-success btn-sm w-100">
+                    Connect
+                </button>
+                <!-- Bottone per connettersi alla stanza, con la funzione JavaScript 'connectToRoom()' che viene chiamata al click -->
+            </form>
+        </div>
+
+        <!-- Inizio della sezione per la chat (visibile solo dopo il login) -->
+        <div id="chat_interface" class="card p-2 shadow mt-2 d-none">
+            <!-- Sezione per la chat, che inizialmente è nascosta grazie alla classe 'd-none' -->
+
+            <p class="small">
+                <!-- Testo che mostra il nome dell'utente e la stanza in cui si trova -->
+                <strong id="who_you_are"></strong>, you are in: <strong id="in_room"></strong>
+            </p>
+
+            <div id="chat_history" class="border rounded p-2 mb-2 bg-white small" style="height: 200px; overflow-y: auto;">
+                <!-- Storia della chat che mostra i messaggi inviati, con uno scroll verticale per i messaggi lunghi -->
+            </div>
+
+            <div class="input-group input-group-sm">
+                <!-- Gruppo di input per inviare messaggi -->
+                <input type="text" id="chat_input" class="form-control form-control-sm" placeholder="Type your message..." onkeypress="if(event.key === 'Enter') sendChatText()">
+                <button type="submit" id="chat_send" onclick="sendChatText()" class="btn btn-success btn-sm">
+                    Send
+                </button>
+                <!-- Bottone per inviare il messaggio, che richiama la funzione 'sendChatText()' al click -->
+            </div>
         </div>
     </div>
-</div>
 </section>

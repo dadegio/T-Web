@@ -1,15 +1,23 @@
 <section class="critic py-5">
     <div class="container">
+
         <h1 class="text-center mb-4">{{criticName}}'s reviews</h1>
 
         <div class="row justify-content-center">
+
+            <!-- Verifica se esistono recensioni per il critico -->
             {{#if movies.reviews}}
                 <div class="col-12">
+                    <!-- Colonna che occupa tutta la larghezza dello schermo -->
                     <ul class="list-group">
+                        <!-- Ciclo Handlebars per ogni recensione con lista non ordinata -->
                         {{#each movies.reviews}}
                             <li class="list-group-item shadow-sm bg-dark text-white mb-3">
+                                <!-- Ogni recensione è un elemento della lista con ombreggiatura, sfondo scuro e testo bianco -->
                                 <div class="d-flex align-items-center mb-3">
+                                    <!-- Utilizzo di Flexbox per allineare gli elementi al centro -->
                                     <div>
+                                        <!-- Contenitore per ogni recensione -->
                                         <h3 class="card-title text-light">{{this.movie_title}}</h3>
                                         <p><strong>Review's type:</strong> {{this.review_type}}</p>
                                         <p><strong>Score:</strong> {{this.review_score}}</p>
@@ -19,13 +27,18 @@
                                 </div>
                             </li>
                         {{/each}}
+                        <!-- Fine ciclo per le recensioni -->
                     </ul>
                 </div>
             {{else}}
+                <!-- Se non ci sono recensioni -->
                 <div class="col-12">
+                    <!-- Colonna che occupa tutta la larghezza dello schermo -->
                     <p class="text-center">There aren't reviews found for this critic.</p>
+                    <!-- Messaggio che indica che non sono state trovate recensioni per questo critico -->
                 </div>
             {{/if}}
+            <!-- Fine del controllo per la presenza delle recensioni -->
         </div>
     </div>
 </section>

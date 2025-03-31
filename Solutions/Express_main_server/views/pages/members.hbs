@@ -1,38 +1,64 @@
 <section class="members py-5">
     <div class="container">
 
-        <!-- Sezione per i Top Critics -->
         <h2 class="mb-3">Top Critics</h2>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Griglia responsiva che si adatta al numero di colonne in base alla larghezza dello schermo -->
             {{#each topCritics}}
+                <!-- Ciclo Handlebars per ogni critico nella lista dei "Top Critics" -->
                 <div class="col">
+                    <!-- Colonna che occupa la larghezza adeguata in base alla griglia -->
                     <div class="card shadow-sm bg-dark text-white">
+                        <!-- Card con ombreggiatura, sfondo scuro e testo bianco -->
                         <div class="card-body text-center">
-                            <!-- Immagine del critico (Top Critics hanno una foto speciale) -->
-                            <img src="/images/topcritic.png" alt="{{this}}" class="card-img-top rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
-                            <!-- Nome del critico sottolineato -->
-                            <a href="/members/{{this}}" class="text-decoration-underline text-decoration-none text-light h5">{{this}}</a>
+                            <!-- Corpo della card centrato -->
+
+                            <!-- Immagine del critico, con foto predefinita per i "Top Critics" -->
+                            <img src="/images/topcritic.png" alt="{{this}}" class="card-img-top rounded-circle mb-3"
+                                 style="width: 100px; height: 100px; object-fit: cover;">
+                            <!-- Immagine circolare (foto del critico) con dimensione fissa -->
+                            <a href="/members/{{this}}" class="text-decoration-underline text-decoration-none text-light h5">
+                                <!-- Link al profilo del critico, con nome sottolineato, senza decorazione di link e in testo chiaro -->
+                                {{this}}
+                            </a>
+                            <!-- Nome del critico -->
                         </div>
                     </div>
                 </div>
             {{/each}}
+            <!-- Fine ciclo per i "Top Critics" -->
         </div>
 
         <!-- Sezione per gli altri Critics -->
         <h2 class="mt-5 mb-3">Other Critics</h2>
+        <!-- Titolo della sezione con margine superiore e inferiore -->
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Griglia responsiva che si adatta al numero di colonne in base alla larghezza dello schermo -->
             {{#each allCritics}}
+                <!-- Ciclo Handlebars per ogni critico nella lista degli "Other Critics" -->
                 <div class="col">
+                    <!-- Colonna che occupa la larghezza adeguata in base alla griglia -->
                     <div class="card shadow-sm bg-dark text-white">
+                        <!-- Card con ombreggiatura, sfondo scuro e testo bianco -->
                         <div class="card-body text-center">
+                            <!-- Corpo della card centrato -->
+
                             <!-- Immagine del critico -->
-                            <img src="/images/critic.jpg" alt="{{this}}" class="card-img-top rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
-                            <!-- Nome del critico sottolineato -->
-                            <a href="/members/{{this}}" class="text-decoration-underline text-decoration-none text-light h5">{{this}}</a>
+                            <img src="/images/critic.jpg" alt="{{this}}" class="card-img-top rounded-circle mb-3"
+                                 style="width: 100px; height: 100px; object-fit: cover;">
+                            <!-- Immagine circolare (foto del critico) con dimensione fissa -->
+                            <a href="/members/{{this}}" class="text-decoration-underline text-decoration-none text-light h5">
+                                <!-- Link al profilo del critico, con nome sottolineato, senza decorazione di link e in testo chiaro -->
+                                {{this}}
+                            </a>
+                            <!-- Nome del critico -->
                         </div>
                     </div>
                 </div>
             {{/each}}
+            <!-- Fine ciclo per gli "Other Critics" -->
         </div>
     </div>
 </section>

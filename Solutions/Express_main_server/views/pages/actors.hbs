@@ -1,40 +1,59 @@
 <section class="actors">
     <h1 class="text-center fw-bold">Our favourites</h1>
     <div class="container mt-4">
+        <!-- Contenitore con margine superiore -->
         <div class="row">
+            <!-- Ciclo sui dati degli attori raggruppati -->
             {{#each groupedActors}}
                 <div class="col-md-6 col-lg-4 mb-4">
+                    <!-- Colonna responsiva che occupa metà della larghezza per schermi medi e un terzo per schermi grandi, con margine inferiore -->
                     <div class="card shadow custom-card">
+                        <!-- Card con ombreggiatura e classe personalizzata -->
                         <div class="card-header text-center">
+                            <!-- Intestazione della card, centrato il contenuto -->
                             <a href="/actors/actors-info/{{@key}}" class="actor-link">
+                                <!-- Link per ogni attore che rimanda alla pagina delle informazioni -->
                                 <img src="/images/actors/{{@key}}.jpg" alt="{{@key}}" class="img-fluid rounded-circle"
                                      onerror="this.onerror=null; this.src='/images/default_actor.jpg';"
                                      style="width: 150px; height: 150px; object-fit: cover;">
+                                <!-- Immagine dell'attore, se non esiste una foto, carica una foto di default -->
                             </a>
+                            <!-- Nome dell'attore sotto la foto -->
                             <h5 class="mt-2">{{@key}}</h5>
                         </div>
                         <div class="card-body">
+                            <!-- Corpo della card -->
                             <div class="row g-2">
+                                <!-- Ciclo sui film associati all'attore -->
                                 {{#each this}}
                                     <div class="col-6">
+                                        <!-- Colonna responsiva che occupa metà della larghezza su dispositivi mobili -->
                                         <a href="/movies/get-all-info/{{filmId}}" class="movie-link">
+                                            <!-- Link per ogni film dell'attore che rimanda alla pagina delle informazioni del film -->
                                             <div class="card text-center bg-dark text-white">
+                                                <!-- Card con sfondo scuro e testo bianco -->
                                                 <img src="{{posterUrl}}" alt="Poster di {{film}}"
                                                      class="img-fluid movie-poster"
                                                      onerror="this.onerror=null; this.src='/images/default_poster.jpg';">
+                                                <!-- Immagine del poster del film, se non esiste, carica una foto di default -->
                                                 <div class="card-body p-2">
+                                                    <!-- Corpo della card del film -->
                                                     <p class="fw-bold mb-1">{{film}}</p>
-                                                    <p class="small text-white">Role: {{role}}</p> <!-- Testo del ruolo bianco -->
+                                                    <!-- Nome del film in grassetto -->
+                                                    <p class="small text-white">Role: {{role}}</p>
+                                                    <!-- Ruolo dell'attore nel film con testo bianco e dimensione piccola -->
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
                                 {{/each}}
+                                <!-- Fine del ciclo per i film dell'attore -->
                             </div>
                         </div>
                     </div>
                 </div>
             {{/each}}
+            <!-- Fine del ciclo per gli attori -->
         </div>
     </div>
 </section>
