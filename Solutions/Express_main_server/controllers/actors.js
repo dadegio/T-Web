@@ -72,7 +72,7 @@ async function getAllInfo(req, res) {
 
         // Esegue entrambe le richieste in parallelo per ridurre il tempo di attesa
         const [actorsResponse, moviesResponse] = await Promise.all([
-            AXIOS.get(`${JAVA_SPRING_SERVER_URL}/actors/get-all`), // Recupera la lista degli attori
+            AXIOS.get(`${JAVA_SPRING_SERVER_URL}/actors/get-actor-by-name?name=` + encodeURIComponent(name)),
             AXIOS.get(`${JAVA_SPRING_SERVER_URL}/movies/actors-home`) // Recupera la lista dei film con i relativi poster
         ]);
 

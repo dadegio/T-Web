@@ -17,7 +17,6 @@ import java.util.Map;
  * Controller per la gestione delle ricerche di attori e film.
  */
 @RestController
-@RequestMapping("/search") // Definisce il percorso base per tutte le ricerche
 public class SearchController {
 
     private final ActorsService actorsService;  // Servizio per la gestione degli attori
