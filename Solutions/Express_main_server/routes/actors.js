@@ -9,14 +9,27 @@ setupSwagger(router);
  * @swagger
  * /actors/get-all-actors:
  *   get:
- *     summary: Recupera tutti gli attori con i loro film e poster
+ *     summary: Recupera tutti gli attori con i loro film
  *     tags:
- *         - Actors
+ *       - Actors
  *     responses:
  *       200:
  *         description: Lista di attori recuperata con successo
  *         content:
- *           text/html:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                   role:
+ *                     type: string
+ *                   id:
+ *                     type: integer
+ *                   posterUrl:
+ *                      type: string
  *       500:
  *         description: Errore nel recupero dei dati
  */
@@ -28,21 +41,27 @@ router.get('/get-all-actors', ACTORS_CONTROLLER.getAllActors);
  *   get:
  *     summary: Recupera i dettagli di un attore specifico
  *     tags:
- *         - Actors
- *     parameters:
- *       - in: path
- *         name: name
- *         required: true
- *         schema:
- *           type: string
- *         description: Nome dell'attore da cercare
+ *       - Actors
  *     responses:
  *       200:
- *         description: Dettagli dell'attore recuperati con successo
+ *         description: Lista di attori recuperata con successo
  *         content:
- *           text/html:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                   role:
+ *                     type: string
+ *                   id:
+ *                     type: integer
+ *                   posterUrl:
+ *                      type: string
  *       500:
- *         description: Impossibile recuperare i dettagli dell'attore
+ *         description: Errore nel recupero dei dati
  */
 router.get('/actors-info/:name', ACTORS_CONTROLLER.getAllInfo);
 
