@@ -1,181 +1,111 @@
 package com.andrianigiordano.springboot.movies;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controller per la gestione dei film.
- * Fornisce API REST per ottenere informazioni sui film, tra cui dettagli, attori, generi e altro.
- */
 @RestController
-@RequestMapping("/movies")  // Definisce il percorso base per tutte le richieste al controller
+@RequestMapping("/movies")
+@Tag(name = "Movies", description = "API per la gestione dei film e dei relativi dettagli")
 public class MoviesController {
 
-    private final MoviesService movieService;  // Servizio per la gestione della logica dei film
+    private final MoviesService movieService;
 
-    /**
-     * Costruttore che inizializza il servizio per la gestione dei film.
-     *
-     * @param movieService il servizio per la gestione dei film
-     */
     public MoviesController(MoviesService movieService) {
         this.movieService = movieService;
     }
 
-    /**
-     * Recupera tutti i film con i rispettivi poster.
-     *
-     * @return una lista di film con poster, racchiusa in una ResponseEntity
-     */
+    @Operation(summary = "Recupera tutti i film con poster")
     @GetMapping("/get-all")
     public ResponseEntity<List<MovieDTO>> getMoviesWithPosters() {
         return ResponseEntity.ok(movieService.getAllMoviesWithPosters());
     }
 
-    /**
-     * Recupera i dettagli di un film dato il suo ID.
-     *
-     * @param movieId l'ID del film da cercare
-     * @return il film corrispondente se trovato, altrimenti un errore 404
-     */
+    @Operation(summary = "Dettagli film per ID")
     @GetMapping("/get-movie-by-id")
-    public ResponseEntity<MovieDTO> getMovieDetails(@RequestParam Long movieId) {
+    public ResponseEntity<MovieDTO> getMovieDetails(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         return movieService.getMovieById(movieId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    /**
-     * Cerca film per nome.
-     *
-     * @param name il nome del film da cercare
-     * @return una lista di film che corrispondono al nome specificato
-     */
+    @Operation(summary = "Cerca film per nome")
     @GetMapping("/search-movies")
-    public List<Movies> searchMoviesByName(@RequestParam String name) {
+    public List<Movies> searchMoviesByName(
+            @Parameter(description = "Nome del film da cercare") @RequestParam String name) {
         return movieService.searchMoviesByName(name);
     }
 
-    /**
-     * Recupera la lista dei 100 migliori film premiati agli Oscar.
-     *
-     * @return una lista di 100 film
-     */
+    @Operation(summary = "Top 100 film premiati agli Oscar")
     @GetMapping("/top100")
     public List<MovieDTO> oscarsTop100() {
         return movieService.oscarsTop100();
     }
 
-    /**
-     * Recupera una lista di film in base agli attori.
-     *
-     * @return una lista di film basati sugli attori presenti
-     */
+    @Operation(summary = "Film in base agli attori")
     @GetMapping("/actors-home")
     public List<MovieDTO> getActorsHome() {
         return movieService.getActors();
     }
 
-    /**
-     * Recupera i film principali per la home page.
-     *
-     * @return una lista di film con i relativi poster
-     */
+    @Operation(summary = "Film per la home page")
     @GetMapping("/get-home-movies")
     public List<MovieDTO> getHomeMovies() {
         return movieService.getPosters();
     }
 
-    /**
-     * Recupera i temi associati a un film dato il suo ID.
-     *
-     * @param movieId l'ID del film
-     * @return i temi del film se presenti, altrimenti un errore 404
-     */
+    @Operation(summary = "Temi del film per ID")
     @GetMapping("/get-themes-by-id")
-    public ResponseEntity<String> getThemesByMovieId(@RequestParam Long movieId) {
+    public ResponseEntity<String> getThemesByMovieId(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         String themes = movieService.getThemesByMovieId(movieId);
-        if (themes.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(themes);
+        return themes.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(themes);
     }
 
-    /**
-     * Recupera il cast e la troupe di un film dato il suo ID.
-     *
-     * @param movieId l'ID del film
-     * @return il cast e la troupe del film se presenti, altrimenti un errore 404
-     */
+    @Operation(summary = "Cast e crew del film per ID")
     @GetMapping("/get-crew-by-id")
-    public ResponseEntity<String> getCrewByMovieId(@RequestParam Long movieId) {
+    public ResponseEntity<String> getCrewByMovieId(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         String crew = movieService.getCrewByMovieId(movieId);
-        if (crew.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(crew);
+        return crew.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(crew);
     }
 
-    /**
-     * Recupera i generi di un film dato il suo ID.
-     *
-     * @param movieId l'ID del film
-     * @return i generi del film se presenti, altrimenti un errore 404
-     */
+    @Operation(summary = "Generi del film per ID")
     @GetMapping("/get-genres-by-id")
-    public ResponseEntity<String> getGenresByMovieId(@RequestParam Long movieId) {
+    public ResponseEntity<String> getGenresByMovieId(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         String genres = movieService.getGenresByMovieId(movieId);
-        if (genres.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(genres);
+        return genres.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(genres);
     }
 
-    /**
-     * Recupera i paesi di produzione di un film dato il suo ID.
-     *
-     * @param movieId l'ID del film
-     * @return i paesi del film se presenti, altrimenti un errore 404
-     */
+    @Operation(summary = "Paesi di produzione del film per ID")
     @GetMapping("/get-countries-by-id")
-    public ResponseEntity<String> getCountriesByMovieId(@RequestParam Long movieId) {
+    public ResponseEntity<String> getCountriesByMovieId(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         String countries = movieService.getCountriesByMovieId(movieId);
-        if (countries.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(countries);
+        return countries.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(countries);
     }
 
-    /**
-     * Recupera le lingue in cui è disponibile un film dato il suo ID.
-     *
-     * @param movieId l'ID del film
-     * @return le lingue del film se presenti, altrimenti un errore 404
-     */
+    @Operation(summary = "Lingue del film per ID")
     @GetMapping("/get-languages-by-id")
-    public ResponseEntity<String> getLanguagesByMovieId(@RequestParam Long movieId) {
+    public ResponseEntity<String> getLanguagesByMovieId(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         String languages = movieService.getLanguagesByMovieId(movieId);
-        if (languages.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(languages);
+        return languages.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(languages);
     }
 
-    /**
-     * Recupera gli studi di produzione di un film dato il suo ID.
-     *
-     * @param movieId l'ID del film
-     * @return gli studi del film se presenti, altrimenti un errore 404
-     */
+    @Operation(summary = "Studi di produzione del film per ID")
     @GetMapping("/get-studios-by-id")
-    public ResponseEntity<String> getStudiosByMovieId(@RequestParam Long movieId) {
+    public ResponseEntity<String> getStudiosByMovieId(
+            @Parameter(description = "ID del film") @RequestParam Long movieId) {
         String studios = movieService.getStudiosByMovieId(movieId);
-        if (studios.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(studios);
+        return studios.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(studios);
     }
 }
