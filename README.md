@@ -1,146 +1,67 @@
-# Progetto IUM - TWEB
+# Film & TV Discovery Platform — Web Engineering Project
 
-## 1. Introduzione
+A multi-service web application for exploring movie and television datasets, built as a university project combining **web development**, **relational and document databases**, and **data analysis**.
 
-Questo progetto nasce dall'integrazione delle competenze acquisite nei moduli **IUM (Interazione Uomo-Macchina)** e **TWEB (Tecnologie Web)**. L'obiettivo principale è stato lo sviluppo di una piattaforma web dedicata alla consultazione di dati relativi a film e serie TV, basata su dataset forniti e gestiti attraverso un'infrastruttura server strutturata.
+**Project authors:** Davide Giordano and Agnese Andriani (shared contribution, 50% each).
 
-Il progetto si articola in due parti principali:
+## What the project demonstrates
 
-* **Elaborazione e analisi dati (IUM)**: pulizia, trasformazione e studio dei dataset.
-* **Sviluppo di applicazione web (TWEB)**: realizzazione di client e backend multipli per la presentazione e gestione dei dati.
+- **Service-oriented backend:** a Node.js/Express gateway coordinates responses from separate services using asynchronous requests.
+- **Different persistence models:** Spring Boot, JPA and PostgreSQL manage structured catalogue data; Express and MongoDB handle dynamic information such as reviews.
+- **Web frontend:** Handlebars templates, Axios and Bootstrap present content and communicate with the backend.
+- **Data preparation:** Python, Pandas and Jupyter notebooks clean and transform the source datasets before import.
 
-Il lavoro è stato svolto in due componenti equilibrate, con una suddivisione delle attività pari a:
+## Architecture
 
-* *Agnese Andriani: 50%*
-* *Davide Giordano: 50%*
+```text
+                   Browser
+                      |
+             Handlebars frontend
+                      |
+              Express gateway
+                  /       \
+                 /         \
+   Spring Boot + JPA       Express service
+      PostgreSQL              MongoDB
+   Catalogue data         Dynamic content
+```
 
----
+The gateway assembles information from multiple backends. It uses `async/await` and `Promise.all` to coordinate independent requests.
 
-## 2. Struttura della Soluzione
+## Tech stack
 
-La piattaforma è composta da:
+| Area | Technologies |
+| --- | --- |
+| Web frontend | Handlebars, Axios, HTML, CSS, Bootstrap |
+| API gateway | Node.js, Express |
+| Catalogue service | Java, Spring Boot, JPA, PostgreSQL |
+| Dynamic-data service | Node.js, Express, MongoDB |
+| Data processing | Python, Pandas, Jupyter, NumPy, Matplotlib, Seaborn, GeoPandas |
 
-| Componente                | Tecnologia                         | Funzione                                              |
-| ------------------------- | ---------------------------------- | ----------------------------------------------------- |
-| Server Express Principale | Node.js + Express                  | Gestione routing e composizione dati per il frontend  |
-| Server Express Secondario | Node.js + Express + MongoDB        | Gestione dati dinamici (recensioni, aggiornamenti)    |
-| Server Backend            | Spring Boot + PostgreSQL           | Gestione dati statici e complessa modellazione entità |
-| Frontend Web              | Handlebars + Axios + CSS/Bootstrap | Visualizzazione e interazione lato utente             |
+## Engineering decisions
 
-### 2.1 Data Cleaning (IUM)
+**Separation of responsibilities.** The application keeps structured catalogue data and frequently updated review data in separate services and databases.
 
-L'elaborazione dati è stata effettuata tramite **Jupyter Notebook** e libreria **Pandas**.
+**API composition.** The gateway aggregates responses from multiple backends so the frontend does not need to coordinate every data source independently.
 
-Fasi principali:
+**Data quality before persistence.** Dataset processing includes handling missing values and duplicates, normalizing inconsistent ratings and exporting cleaned data for database import.
 
-* Importazione e comprensione dei dataset
-* Gestione valori mancanti e duplicati
-* Uniformazione dei formati (es. scala punteggi recensioni → 0-10)
-* Esportazione dei dati pronti per i database
+## Repository guide
 
-**Problematiche:**
+- [`Solutions/`](Solutions/) — project implementation
+- [`Query/`](Query/) — queries and related material
+- [`Report/`](Report/) — project reports
 
-* Conversione scale di valutazione eterogenee
-* Pulizia film inconsistenti o non distribuiti
+## Running the project
 
-**Output:**
-Dataset utilizzabili senza ulteriori trasformazioni durante l'uso in backend.
+The repository contains multiple applications and databases. **Setup has not yet been consolidated into a single verified quick-start command.** Refer to the individual application folders under `Solutions/` for their configuration and run requirements.
 
----
+Before running locally, configure the required PostgreSQL and MongoDB services and check each application's database connection settings.
 
-### 2.2 Data Analysis (IUM)
+## Current scope
 
-Sono stati creati due notebook di analisi tematiche:
+This is an academic project and demonstration of a multi-service architecture, not a production deployment. The repository documents the implementation and data analysis; it does not currently claim a public live demo, deployment pipeline or verified end-to-end setup script.
 
-* `cartoon.ipynb`
-* `nolan.ipynb`
+## Why this project matters
 
-Utilizzate: Pandas, Matplotlib, Seaborn, Numpy, GeoPandas.
-
-Requisiti soddisfatti:
-
-* Ampia varietà di visualizzazioni
-* Utilizzo di grafici geografici
-* Notebook consegnati in formato eseguito
-
----
-
-### 2.3 Server Express Principale (TWEB)
-
-Responsabile dell'instradamento richieste e assemblaggio dati provenienti da backend multipli.
-
-**Challenge:** sincronizzazione tempi di risposta e aggregazione dati.
-
-**Soluzione:** utilizzo di `async/await` e `Promise.all`.
-
----
-
-### 2.4 Server Express Secondario (Dati Dinamici)
-
-Gestione di recensioni e contenuti aggiornabili.
-
-Richiede configurazione di **MongoDB** con modelli associati alle tabelle interessate.
-
----
-
-### 2.5 Server Spring Boot (Dati Statici)
-
-Gestione film, attori e metadati tramite **PostgreSQL** + **JPA**.
-
-Architettura a livelli:
-
-* Entity
-* Repository
-* Service
-* Controller
-
-Utilizzo di **DTO** per aggregazione trasparente dei dati (es. film + poster).
-
----
-
-### 2.6 Frontend Web
-
-Sviluppato con **Handlebars** per il templating e **Axios** per le chiamate API.
-
-Ottimizzazioni:
-
-* Minimizzazione dati richiesti nelle pagine principali
-* Gestione pagina errore dedicata
-
----
-
-## 3. Conclusioni
-
-Il progetto ha permesso di integrare competenze trasversali su:
-
-* pulizia e analisi dati
-* modellazione entità backend
-* gestione comunicazione tra microservizi
-* sviluppo frontend dinamico basato su API
-
-La divisione delle responsabilità tra server ha consentito un design pulito, ma ha richiesto particolare cura nell'orchestrazione delle comunicazioni.
-
----
-
-## 4. Bibliografia e Strumenti Utilizzati
-
-* Slide dei corsi IUM e Tweb
-* Documentazione ufficiale: Pandas, Express.js, Spring Boot, PostgreSQL, MongoDB
-* Bootstrap, W3School, JavaDoc
-* ChatGPT utilizzato per supporto alla scrittura e ristrutturazione codice, con verifica manuale successiva
-
----
-
-## 5. Stato del Progetto
-
-| Componente     | Stato           |
-| -------------- | --------------- |
-| Data Cleaning  | ✅ Completato    |
-| Data Analysis  | ✅ Completato    |
-| Backend Spring | ✅ Funzionante   |
-| Server Express | ✅ Funzionante   |
-| Frontend       | ✅ Funzionante   |
-
----
-
-Fine del documento.
+The project covers challenges relevant to software for media platforms: combining heterogeneous content sources, structuring backend services, modeling catalogue information, and displaying data through a web interface.
